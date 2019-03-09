@@ -25,7 +25,11 @@ SECRET_KEY = '%zmul9l2j(5d=b#ig@k79gsx=+0*8acx4=my)_q)d#j$r_y4p5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# The simplest case: just add the domain name(s) and IP addresses of your Django server
+# ALLOWED_HOSTS = [ 'example.com', '203.0.113.5']
+# To respond to 'example.com' and any subdomains, start the domain with a dot
+# ALLOWED_HOSTS = ['.example.com', '203.0.113.5']
+ALLOWED_HOSTS = ['142.93.118.75', 'epiwatchnull.me']
 
 
 # Application definition
@@ -75,10 +79,10 @@ WSGI_APPLICATION = 'seng3011.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'default': {
+                'ENGINE': 'djongo',
+                'NAME': 'nulldb',
+        }
 }
 
 
@@ -118,6 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = '/opt/SENG3011_Null/PHASE_1/API_SourceCode/static/'
 STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
