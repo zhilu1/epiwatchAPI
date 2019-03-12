@@ -1,0 +1,93 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+	worker_connections 768;
+	# multi_accept on;
+}
+
+http {
+
+upstream test_server {
+  server unix:/home/zhilu/epiwatchAPI/run/gunicorn.sock fail_timeout=10s;
+}
+
+# This is not neccessary - it's just commonly used
+# it just redirects example.com -> www.example.com
+# so it isn't treated as two separate websites
+server {
+        listen 80;
+        server_name epiwatchnull.me;
+        return 301 $scheme://www.epiwatchnull.me$request_uri;
+}
+
+server {
+    listen   80;
+    server_name www.epiwatchnull.me;
+
+    client_max_body_size 4G;
+
+    access_log /home/zhilu/epiwatchAPI/logs/nginx-access.log;
+    error_log /home/zhilu/epiwatchAPI/logs/nginx-error.log warn;
+
+    location /static/ {
+        autoindex on;
+        alias   /home/zhilu/epiwatchAPI/seng3011/static/;
+    }
+
+    location /media/ {
+        autoindex on;
+        alias   /home/zhilu/epiwatchAPI/seng3011/media/;
+    }
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+
+        if (!-f $request_filename) {
+            proxy_pass http://test_server;
+            break;
+        }
+    }
+
+    #For favicon
+    location  /favicon.ico {
+        alias /home/zhilu/epiwatchAPI/seng3011/static/img/favicon.ico;
+    }
+    #For robots.txt
+    location  /robots.txt {
+        alias /home/zhilu/epiwatchAPI/seng3011/static/robots.txt ;
+    }
+    # Error pages
+    error_page 500 502 503 504 /500.html;
+    location = /500.html {
+        root /home/zhilu/epiwatchAPI/seng3011/static/;
+    }
+}
+
+}
+
+
+#mail {
+#	# See sample authentication script at:
+#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+# 
+#	# auth_http localhost/auth.php;
+#	# pop3_capabilities "TOP" "USER";
+#	# imap_capabilities "IMAP4rev1" "UIDPLUS";
+# 
+#	server {
+#		listen     localhost:110;
+#		protocol   pop3;
+#		proxy      on;
+#	}
+# 
+#	server {
+#		listen     localhost:143;
+#		protocol   imap;
+#		proxy      on;
+#	}
+#}
