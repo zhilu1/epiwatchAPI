@@ -34,12 +34,12 @@ server {
 
     location /static/ {
         autoindex on;
-        alias   /home/zhilu/epiwatchAPI/seng3011/static/;
+        root   /home/zhilu/epiwatchAPI/static/rest_framework;
     }
 
     location /media/ {
         autoindex on;
-        alias   /home/zhilu/epiwatchAPI/seng3011/media/;
+        root   /home/zhilu/epiwatchAPI/media/;
     }
 
     location / {
@@ -55,16 +55,16 @@ server {
 
     #For favicon
     location  /favicon.ico {
-        alias /home/zhilu/epiwatchAPI/seng3011/static/img/favicon.ico;
+        alias /home/zhilu/epiwatchAPI/static/img/favicon.ico;
     }
     #For robots.txt
     location  /robots.txt {
-        alias /home/zhilu/epiwatchAPI/seng3011/static/robots.txt ;
+        alias /home/zhilu/epiwatchAPI/static/robots.txt ;
     }
     # Error pages
     error_page 500 502 503 504 /500.html;
     location = /500.html {
-        root /home/zhilu/epiwatchAPI/seng3011/static/;
+        root /home/zhilu/epiwatchAPI/static/;
     }
 }
 
