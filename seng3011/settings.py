@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%zmul9l2j(5d=b#ig@k79gsx=+0*8acx4=my)_q)d#j$r_y4p5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['142.93.118.75', 'epiwatchnull.me',
                  'www.epiwatchnull.me', '127.0.0.1']
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_swagger',
     'gunicorn',
 ]
 
