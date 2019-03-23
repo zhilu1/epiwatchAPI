@@ -1,14 +1,10 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework_mongoengine import serializers as mongoserializers
+
+from epiwatch.models import Article
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class ArticleSerializer(mongoserializers.DocumentSerializer):
     class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'groups')
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ('url', 'name')
+        model = Article
+        fields = '__all__'

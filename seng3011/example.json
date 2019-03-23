@@ -1,0 +1,45 @@
+{
+  "id": "iddidid",
+  "url": "www.url.com",
+  "headline": "tttt",
+  "date_of_publication": "2010-12-09T11:11:00",
+  "main_text": "testtest",
+  "reports": [
+    {
+      "id": "anothieididid",
+      "disease": ["ze", "sd"],
+      "syndrome": ["ez", "Zara"],
+      "reported_events": [
+        {
+          "id": "hahaha",
+          "type": "recovered",
+          "date": "2008-02-08T18:08:58",
+          "location": [
+            {
+              "id": "hahahhahaha",
+              "country": "Debian",
+              "location": "there",
+              "geonames_id": 888
+            }
+          ],
+          "number_affected": 8
+        },
+        {
+          "id": "sososo",
+          "type": "death",
+          "date": "2008-02-08T18:08:58",
+          "location": [
+            {
+              "id": "sdsadsa",
+              "country": "UK",
+              "location": "Ink",
+              "geonames_id": 999
+            }
+          ],
+          "number_affected": 8
+        }
+      ],
+      "comment": "unblank"
+    }
+  ]
+}
