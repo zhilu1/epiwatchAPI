@@ -21,12 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bu0-(jr-6ibo#c(vt8i_(^dbczngm#6-6_9$41hs&59hf2g)=9'
+SECRET_KEY = '%zmul9l2j(5d=b#ig@k79gsx=+0*8acx4=my)_q)d#j$r_y4p5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['142.93.118.75', 'epiwatchnull.me',
+                 'www.epiwatchnull.me', '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_mongoengine',
     'rest_framework_swagger',
     'epiwatch',
+    'gunicorn',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -141,6 +144,7 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+SITE_ID = 1
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': None,
