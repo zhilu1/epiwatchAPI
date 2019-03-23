@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NAME="seng3011"                              #Name of the application (*)
-DJANGODIR=/home/zhilu/epiwatchAPI 		# Django project directory (*)
-SOCKFILE=/home/zhilu/epiwatchAPI/run/gunicorn.sock        # we will communicate using this unix socket (*)
+DJANGODIR=/var/www/epiwatchAPI               # Django project directory (*)
+SOCKFILE=/var/www/epiwatchAPI/run/gunicorn.sock        # we will communicate using this unix socket (*)
 USER=nginx                                        # the user to run as (*)
 GROUP=webdata                                     # the group to run as (*)
 NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn (*)
@@ -13,7 +13,7 @@ echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
 cd $DJANGODIR
-source /home/zhilu/epiwatchAPI/env/bin/activate
+source /var/www/epiwatchAPI/env/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
@@ -23,7 +23,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
-exec /home/zhilu/epiwatchAPI/env/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec /var/www/epiwatchAPI/env/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --workers $NUM_WORKERS \
   --bind=unix:$SOCKFILE
