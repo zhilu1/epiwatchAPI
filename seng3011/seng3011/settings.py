@@ -14,7 +14,8 @@ import os
 import mongoengine
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%zmul9l2j(5d=b#ig@k79gsx=+0*8acx4=my)_q)d#j$r_y4p5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['142.93.118.75', 'epiwatchnull.me',
@@ -123,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Sydney'
 
 USE_I18N = True
 
@@ -149,4 +150,29 @@ SITE_ID = 1
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': None,
     'USE_SESSION_AUTH': False
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "%(asctime)s - %(levelname)s - %(method)s - %(status_code)s - %(request_path)s - %(server_hostname)s:%(remote_address)s - access_time:%(access_time)s - service_time:%(service_time)s - service_provider:%(service_provide)s ",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+    },
+    'handlers': {
+        'log_file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR + '/logs/APILoggers.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'epiwatch': {
+            'handlers': ['log_file'],
+            'level': 'INFO',
+        },
+    },
 }

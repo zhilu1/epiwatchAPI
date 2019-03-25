@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from epiwatch.custom_viewset import ListOnlyModelViewSet
 from epiwatch.serializers import *
 from epiwatch.models import Article
+from epiwatch.mixins import LoggingMixin
 from rest_framework.filters import BaseFilterBackend
 import coreapi
 import datetime
@@ -70,16 +71,34 @@ class SimpleFilterBackend(BaseFilterBackend):
         ]
 
 
-class ArticleViewSet(ListOnlyModelViewSet):
+class ArticleViewSet(LoggingMixin, ListOnlyModelViewSet):
 
     serializer_class = ArticleSerializer
-
     filter_backends = (SimpleFilterBackend,)
     queryset = Article.objects.all()
 
     def list(self, request):
+        """
+        GET a list articles based on input parameters.
+        The structure of article response is as following
+        {
+            url: String,
+            date_of_publication: <string::date>,
+            headline: String,
+            main_text: String,
+            reports: [<object::report>]
+        }
+
+        object::report An object containing information about 1 or more events (death, reports, etc) of a disease and/or syndromes.
+        {
+            disease: [<string::disease>],
+            syndrome: [<string::syndrome>],
+            reported_events: [<object::event-report>],
+            comment: String
+        }
+
+        """
         queryset = self.filter_queryset(self.get_queryset())
-        # pagination
         serializer = self.get_serializer(queryset, many=True)
         # get starting date and ending date from url parameters
         start_date = self.request.query_params.get('start_date', None)
@@ -102,5 +121,4 @@ class ArticleViewSet(ListOnlyModelViewSet):
                     results.append(result)
         else:
             return Response(status=400)
-        # return the final result, check if paginated
         return Response(results)
