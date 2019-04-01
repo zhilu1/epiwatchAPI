@@ -4,7 +4,7 @@
   "headline": "tttt",
   "date_of_publication": "2010-12-09T11:11:00",
   "main_text": "testtest",
-  "reports": [
+  "report": [
     {
       "id": "anothieididid",
       "disease": ["ze", "sd"],
@@ -22,19 +22,15 @@
               "geonames_id": 888
             }
           ],
-          "number_affected": 8
+          "number_affected": "8"
         },
         {
           "id": "sososo",
           "type": "death",
           "date": "2008-02-08T18:08:58",
           "location": [
-            {
-              "id": "sdsadsa",
-              "country": "UK",
-              "location": "Ink",
-              "geonames_id": 999
-            }
+
+            "testtt"
           ],
           "number_affected": 8
         }
@@ -42,4 +38,7 @@
       "comment": "unblank"
     }
   ]
-}
+},
+
+{
+  "headline": "Ebola virus disease \u2013 Democratic Republic of the Congo ", "url": "https://www.who.int/csr/don/21-march-2019-ebola-drc/en/", "report": {"reported_events": {"date": "", "number - affected": "", "type": "", "location": ["Congo"]}, "disease": ["other"]}, "context": "The Ebola virus disease (EVD) outbreak in North Kivu and Ituri provinces has recently shown an increase in the number of cases reported by week, after many weeks of overall decline (Figure 1). This rise is not unexpected and, in part, likely a result of the increased security challenges, including the recent direct attacks on treatment centers, and pockets of community mistrust, which slowed some response activities in affected areas for a few days.Katwa, Butembo, Masereka and Mandima account for over 80% of all cases in the last 21 days. A total of 97 confirmed cases were reported during the last 21 days from 38 of the 130 health areas affected to date (Table 1, Figure 2). This week, EVD was confirmed in an infant who died in Bunia Health Zone, but whose parents are in good health. This is the first confirmed case from this health zone; a previous case was identified from neighbouring Rwampara Health Zone in early February. While investigations are ongoing to determine the source of the infection, teams in place have rapidly implemented response activities including contact tracing, vaccination and heightened surveillance.  Given the geographical spread of the epidemic and the high mobility in this region, the risk of Ebola spreading to unaffected areas or being reintroduced to previously affected areas remains high.Response teams are fully operational in all outbreak affected areas. There are encouraging improvements in community acceptance of the response, despite the ongoing challenges of insecurity caused by armed groups.  Over 90% of people eligible for vaccination have accepted to do so, and over 90% of these individuals having participated in follow-up visits. To date, 89 855 people have been vaccinated. Vaccination teams are continuing to follow-up on the rings where some families have not yet accepted the intervention.Field laboratories have sustained similar testing rates as previous weeks. On average, 1300 samples are tested weekly and more than 23 000 samples have been tested to date with a turnaround time of less than 48 hours. Ebola Treatment Centres (ETCs) and Transit Centres continue to operate, and the Katwa Transit Centre is being scaled up by ALIMA to increase capacity to respond to the outbreak in that area. To date, 335 patients have received one of the four investigational therapeutics under the MEURI protocol (compassionate use), and 80 patients under the RCT protocol.In Butembo, Katwa, and Vuhovi health zones, response teams have continued to engage communities through various community dialogue platforms. Five community dialogue platforms have been organised in three health areas in Katwa, one health area in Butembo and one health area in Vuhovi. This initiative allows community members to participate and lead in decisions regarding Ebola response interventions in their localities. In other EVD-affected areas, ongoing activities include systematic collection of community feedback and responding to community concerns through adjustments of activities in consultation with community leaders and influencers. Community outreach activities are carried out in faith-based settings, market places, and schools with the collaboration of faith-based leaders and civil society groups (including women and youth). Civil society groups and community health volunteers also assist in the door-to-door community outreach activities on a regular basis.Since the beginning of the outbreak to 19 March 2019, 980 EVD cases1 (915 confirmed and 65 probable) have been reported, of which 57% (554) were female and 30% (293) were children aged less than 18 years. Cumulatively, cases have been reported from 130 of 339 health areas across 21 health zones of the North Kivu and Ituri provinces (Table 1). Overall, 610 deaths (case fatality ratio: 62%) have been reported, and 317 patients have been discharged after treatment in ETCs. *Data in recent weeks are subject to delays in case confirmation and reporting, as well as ongoing data cleaning.For further detailed information about the public health response actions by the MoH, WHO, and partners, please refer to the latest situation reports published by the WHO Regional Office for Africa:WHO continuously monitors changes to the epidemiological situation and context of the outbreak to ensure that support to the response is adapted to the evolving circumstances. The last assessment concluded that the national and regional risk levels remain very high, while global risk levels remain low. Attacks on ETCs in Katwa and Butembo represented the first large-scale and organized attacks targeted directly at the Ebola response, and were of a different order of magnitude to episodes of mistrust in communities or dangers of being caught in crossfire between fighting parties. In addition, the persistence of pockets of community resistance and mistrust, exacerbated by political tensions and insecurity, have resulted in recurrent temporary suspension and delays of case investigation and response activities in affected areas; reducing the overall effectiveness of interventions. The high proportion of community deaths reported among confirmed cases, persistent delays in detection and isolation in ETCs, challenges in the timely reporting and response to probable cases, collectively increase the likelihood of further chains of transmission in affected communities and increased risk of geographical spread within the Democratic Republic of the Congo and to neighbouring countries. As do the risk of increased population movement anticipated during periods of heightened insecurity.International traffic: WHO advises against any restriction of travel to, and trade with, the Democratic Republic of the Congo based on the currently available information. There is currently no licensed vaccine to protect people from the Ebola virus. Therefore, any requirements for certificates of Ebola vaccination are not a reasonable basis for restricting movement across borders or the issuance of visas for passengers leaving the Democratic Republic of the Congo. WHO continues to closely monitor and, if necessary, verify travel and trade measures in relation to this event. Currently, no country has implemented travel measures that significantly interfere with international traffic to and from the Democratic Republic of the Congo. Travellers should seek medical advice before travel and should practice good hygiene.For more information, see:1The number of cases is subject to change due to ongoing reclassification, retrospective investigation and the availability of laboratory results.", "date_of_publication": "2019-03-21"},

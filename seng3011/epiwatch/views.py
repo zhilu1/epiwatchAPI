@@ -11,6 +11,8 @@ from rest_framework.filters import BaseFilterBackend
 import coreapi
 import datetime
 from mongoengine.queryset.visitor import Q
+import re
+import calendar
 
 
 class SimpleFilterBackend(BaseFilterBackend):
@@ -20,8 +22,9 @@ class SimpleFilterBackend(BaseFilterBackend):
         if location is not None:
             # filter the queryset whose location matches location or country in reporteed  events
             location_filter = Q(
-                reports__reported_events__location__location__iexact=location) | Q(
-                reports__reported_events__location__country__iexact=location)
+                reports__reported_events__location__iexact=location)
+            # reports__reported_events__location__location__iexact=location) | Q(
+            # reports__reported_events__location__country__iexact=location)
             queryset = queryset.filter(
                 location_filter)
         keyterms = request.query_params.get('keyterms', None)
@@ -32,8 +35,8 @@ class SimpleFilterBackend(BaseFilterBackend):
             keyterm_arr = filter(None, keyterm_arr)
             keyterm_filter = Q()
             for keyterm in keyterm_arr:
-                keyterm_filter |= Q(reports__disease__iexact=keyterm)
-                keyterm_filter |= Q(reports__syndrome__iexact=keyterm)
+                keyterm_filter |= Q(main_text__icontains=keyterm)
+                # keyterm_filter |= Q(reports__syndrome__iexact=keyterm)
             queryset = queryset.filter(keyterm_filter)
         return queryset
 
@@ -81,6 +84,7 @@ class ArticleViewSet(LoggingMixin, ListOnlyModelViewSet):
         """
         GET a list articles based on input parameters.
         The structure of article response is as following
+
         {
             url: String,
             date_of_publication: <string::date>,
@@ -97,7 +101,27 @@ class ArticleViewSet(LoggingMixin, ListOnlyModelViewSet):
             comment: String
         }
 
+        object::event-report
+        {
+            type: <string::event-type>,
+            date: <string::date>,
+            location: [<object::location>],
+            number_affected: <number>
+        }
+
+        object::location
+        {
+            country: String
+            location: String
+        }
+example input:
+
+        start_date: 1111-11-11T11:11:11,
+        end_date: 2011-11-11T11:11:11,
+        keyterms: Zira,Anthrax,
+        location: Sydney
         """
+
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         # get starting date and ending date from url parameters
@@ -115,9 +139,53 @@ class ArticleViewSet(LoggingMixin, ListOnlyModelViewSet):
             except:
                 return Response(data="please input correct datetime which matches format '%Y-%m-%dT%H:%M:%S'", status=400)
             for result in filtered_data:
-                cur_date = datetime.datetime.strptime(
-                    result['date_of_publication'], '%Y-%m-%dT%H:%M:%S')
-                if(st <= cur_date <= ed):
+                # getting min possible date and max possible date from dates
+                min_date = ""
+                max_date = ""
+                gs = re.match(
+                    r'([\dx]{4})-([\dx]{2})-([\dx]{2})T([\dx]{2}):([\dx]{2}):([\dx]{2})', result["date_of_publication"]).groups()
+                min_date = gs[0]  # year
+                max_date = gs[0]
+                year = int(gs[0])
+                month = gs[1]
+                if(gs[1] == "xx"):  # month
+                    min_date += "-01"
+                    max_date += "-12"
+                    month = 12
+                else:
+                    min_date = min_date + "-" + gs[1]
+                    max_date = max_date + "-" + gs[1]
+                if(gs[2] == "xx"):  # day
+                    min_date += "-01"
+                    day = calendar.monthrange(year, month)[1]
+                    max_date = max_date + "-" + str(day)
+                else:
+                    min_date = min_date + "-" + gs[2]
+                    max_date = max_date + "-" + gs[2]
+                min_date = min_date + "T"
+                max_date = max_date + "T"
+                if(gs[3] == "xx"):  # day
+                    min_date += "00"
+                    max_date += "23"
+                else:
+                    min_date = min_date + gs[3]
+                    max_date = max_date + gs[3]
+
+                for i in range(4, 6):
+                    if(gs[i] == "xx"):  # month
+                        min_date += ":00"
+                        max_date += ":59"
+                    else:
+                        min_date = min_date + ":" + gs[i]
+                        max_date = max_date + ":" + gs[i]
+
+                minimum_date = datetime.datetime.strptime(
+                    min_date, '%Y-%m-%dT%H:%M:%S')
+                maximum_date = datetime.datetime.strptime(
+                    max_date, '%Y-%m-%dT%H:%M:%S')
+
+                # check if [min_date,max_date] and [st,ed] has intersection
+                if(max(minimum_date, st) <= min(maximum_date, ed)):
                     results.append(result)
         else:
             return Response(status=400)

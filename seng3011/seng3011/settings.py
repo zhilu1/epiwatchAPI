@@ -22,14 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%zmul9l2j(5d=b#ig@k79gsx=+0*8acx4=my)_q)d#j$r_y4p5'
+SECRET_KEY = 'bu0-(jr-6ibo#c(vt8i_(^dbczngm#6-6_9$41hs&59hf2g)=9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-ALLOWED_HOSTS = ['142.93.118.75', 'epiwatchnull.me',
-                 'www.epiwatchnull.me', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -61,10 +59,23 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'seng3011.urls'
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "project", "static"),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [STATIC_ROOT],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,7 +107,7 @@ DATABASES = {
 mongoengine.connect(
     username="zhilu",
     password="nullnull",
-    host="mongodb://zhilu:nullnull@cluster0-shard-00-01-ycp9i.mongodb.net:27017,cluster0-shard-00-02-ycp9i.mongodb.net:27017/TESTDB?replicaSet=Cluster0-shard-0&ssl=true&authSource=admin",
+    host="mongodb://zhilu:nullnull@cluster0-shard-00-01-ycp9i.mongodb.net:27017,cluster0-shard-00-02-ycp9i.mongodb.net:27017/NULLDB?replicaSet=Cluster0-shard-0&ssl=true&authSource=admin",
 )
 
 
@@ -133,20 +144,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "project", "static"),
-)
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-SITE_ID = 1
-
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': None,
     'USE_SESSION_AUTH': False
@@ -157,7 +154,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': "%(asctime)s - %(levelname)s - %(method)s - %(status_code)s - %(request_path)s - %(server_hostname)s:%(remote_address)s - access_time:%(access_time)s - service_time:%(service_time)s - service_provider:%(service_provide)s ",
+            'format': "%(asctime)s - %(levelname)s - %(method)s - %(status_code)s - %(request_params)s - %(server_hostname)s:%(remote_address)s - access_time:%(access_time)s - service_time:%(service_time)s - service_provider:%(service_provider)s - data_source:%(data_source)s ",
             'datefmt': "%d/%b/%Y %H:%M:%S"
         },
     },
@@ -165,7 +162,7 @@ LOGGING = {
         'log_file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR + '/logs/APILoggers.log',
+            'filename': BASE_DIR + '/static/APILoggers.log',
             'formatter': 'verbose'
         },
     },

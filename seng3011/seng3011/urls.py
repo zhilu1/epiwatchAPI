@@ -6,7 +6,7 @@ from epiwatch.schema_view import my_get_swagger_view
 from epiwatch.views import *
 from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
-
+from django.views.generic import TemplateView
 
 schema_view = my_get_swagger_view()
 
@@ -14,7 +14,7 @@ schema_view = my_get_swagger_view()
 router = DefaultRouter()
 
 # app views and viewsets
-router.register(r'article', ArticleViewSet, r"article")
+router.register(r'articles', ArticleViewSet, r"articles")
 
 urlpatterns = [
     # default django admin interface (currently unused)
@@ -25,8 +25,11 @@ urlpatterns = [
 
     # index page should be served by django to set cookies, headers etc.
     url('^$', schema_view),
+    url(r'^index/', TemplateView.as_view(template_name='index.html')),
+    url(r'^logs/', TemplateView.as_view(template_name='logs.html')),
+    url(r'^logtext/', TemplateView.as_view(template_name='APILoggers.log')),
 ]
 
-# let django built-in server serve static and media content
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# # let django built-in server serve static and media content
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
