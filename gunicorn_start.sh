@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAME="seng3011"                              #Name of the application (*)
-DJANGODIR=/var/www/epiwatchAPI               # Django project directory (*)
+DJANGODIR=/var/www/epiwatchAPI/seng3011               # Django project directory (*)
 SOCKFILE=/var/www/epiwatchAPI/run/gunicorn.sock        # we will communicate using this unix socket (*)
 USER=nginx                                        # the user to run as (*)
 GROUP=webdata                                     # the group to run as (*)
