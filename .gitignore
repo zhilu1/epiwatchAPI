@@ -9,6 +9,7 @@ logs
 db.sqlite3
 uwsgi.ini
 log/**
+static/**
 !log/placeholder
 media/**
 !media/**/init.txt
