@@ -20,10 +20,11 @@ class LoggingMixin(object):
             'server_hostname': socket.gethostname(),
             'method': request.method,
             'status_code': status_code,
-            'request_path': request.get_full_path(),
+            'request_params': request.query_params,
             'access_time': request.start_time.astimezone().strftime("%Y-%m-%d %H:%M:%S"),
             'service_time': (datetime.now(timezone.utc) - request.start_time).total_seconds(),
-            'service_provide': "NULL"
+            'service_provider': "NULL",
+            'data_source': "https://www.who.int/emergencies/diseases/news/en/"
         }
         if status.is_server_error(status_code):
             logger.error('error', extra=log_kwargs)

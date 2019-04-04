@@ -1,11 +1,12 @@
 from mongoengine import Document, EmbeddedDocument, fields
 
+
 class Location(EmbeddedDocument):
     # id = fields.StringField(required=True)
-    country = fields.StringField(required=True)
-    location = fields.StringField(required=True)
-    geonames_id = fields.LongField(
-        required=False, null=True)  # optional/advaned
+    country = fields.ListField(fields.StringField())
+    location = fields.ListField(fields.StringField())
+    # geonames_id = fields.LongField(
+    #     required=False, null=True)  # optional/advaned
 
 
 class EventReport(EmbeddedDocument):
@@ -14,6 +15,7 @@ class EventReport(EmbeddedDocument):
     date = fields.StringField()
     location = fields.EmbeddedDocumentListField(Location)
     number_affected = fields.IntField(min_vale=0)
+    # number_affected = fields.StringField()
 
 
 class Report(EmbeddedDocument):
@@ -28,7 +30,8 @@ class Article(Document):
     # id = fields.StringField(primary_key=True)
     url = fields.StringField(required=True)
     headline = fields.StringField(required=True)
-    date_of_publication = fields.StringField(required=True, null=True)
+    date_of_publication = fields.StringField()
     # is of type either date-exact or date-range
-    main_text = fields.StringField(required=True)
+    main_text = fields.StringField()
     reports = fields.EmbeddedDocumentListField(Report)
+    # meta = {'collection': 'NULLDB'}
