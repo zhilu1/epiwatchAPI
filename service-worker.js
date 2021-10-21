@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/epiwatchAPI/precache-manifest.9b2180f8b662b3bfcdff65e23fa42556.js"
+  "/epiwatchAPI/precache-manifest.4b6db580de0702d05a83021a0dc5d422.js"
 );
 
 workbox.clientsClaim();
